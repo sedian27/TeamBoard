@@ -1,15 +1,19 @@
 import express from "express";
+
 import userController from "../controllers/userController.js";
-import uMidd from "../middleware/userValidate.js";
-import rMidd from "../middleware/roleValidate.js";
+
+import userMidd from "../middleware/userValidate.js";
+import roleMidd from "../middleware/roleValidate.js";
 
 const router = express.Router();
 
 router.post(
   "/registerUser",
-  uMidd.existingUser,
-  rMidd.existingRole,
+  userMidd.existingUser,
+  roleMidd.existingRole,
   userController.registerUser
 );
+
+router.get("/listUser", userController.listUser);
 
 export default router;
