@@ -15,7 +15,7 @@ const registerUser = async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: passHash,
-    role: req.body.rol,
+    role: req.body.role,
   });
 
   const result = await userSchema.save();
@@ -30,7 +30,6 @@ const registerUser = async (req, res) => {
           _id: result._id,
           name: result.name,
           role: result.role,
-
           iat: moment().unix(),
         },
         process.env.SK_JWT
@@ -42,7 +41,8 @@ const registerUser = async (req, res) => {
 };
 
 const listUser = async (req, res) => {
-  let users = await user.find();
+  let users = await user.find().populate("role").exec();
+
   if (users.length === 0)
     return res.status(400).send({ message: "No search results" });
 
