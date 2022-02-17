@@ -44,7 +44,7 @@ const listUser = async (req, res) => {
   let users = await user.find().populate("role").exec();
 
   if (users.length === 0)
-    return res.status(400).send({ message: "No search results" });
+    return res.status(404).send({ message: "No search results" });
 
   return res.status(200).send({ users });
 };
