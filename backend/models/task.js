@@ -4,7 +4,7 @@ const taskSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.ObjectId, ref: "users" },
   name: String,
   description: String,
-  taskStatus: "to-do",
+  taskStatus: { type: String, default: "to-do" },
   imageUrl: String,
   registerDate: { type: Date, default: Date.now },
 });
